@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>65023cc5-e542-42cd-b676-d35a02cdfa8e</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\sermon.Core\sermon.Core.csproj" />
+  </ItemGroup>
+
+
+</Project>
