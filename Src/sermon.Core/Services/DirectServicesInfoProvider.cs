@@ -8,7 +8,14 @@ namespace sermon.Core.Services
 {
     public class DirectServicesInfoProvider : IServicesInfoProvider
     {
-        private const string DEFAULT_CUSTOM_SERVICE_BASE_URL = "http://localhost";
+        // Format: name1=whole_url1;name2=whole_url2;...;nameN=whole_utlN
+        private const string DEFAULT_CUSOM_SERVICES = @"
+            prehdo=http://localhost:5000/prehdo;
+            datetime=http://localhost:5005/datetime;
+            weather=http://localhost:5010/weather;
+            location=http://localhost:5015/location;
+            system=http://localhost:5020/system;
+            weatherhub=http://localhost:5025/weatherhub";
 
         private readonly ConcurrentBag<ServiceInfo> _serviceInfos;
         private readonly ILogger<DirectServicesInfoProvider> _logger;
@@ -18,14 +25,16 @@ namespace sermon.Core.Services
             _serviceInfos = new ConcurrentBag<ServiceInfo>();
             _logger = logger;
 
-            var bu = Environment.GetEnvironmentVariable("SERMON_CUSTOM_SERVICE_BASE_URL")
-                ?? DEFAULT_CUSTOM_SERVICE_BASE_URL;
+            var cs = Environment.GetEnvironmentVariable("SERMON_CUSTOM_SERVICES")
+                ?? DEFAULT_CUSOM_SERVICES;
 
-            Add(new ServiceInfo("prehdo", $"{bu}:5000/prehdo"));
-            Add(new ServiceInfo("datetime", $"{bu}:5005/datetime"));
-            Add(new ServiceInfo("weather", $"{bu}:5010/weather"));
-            Add(new ServiceInfo("location", $"{bu}:5015/location"));
-            Add(new ServiceInfo("system", $"{bu}:5020/system"));
+            var services = cs.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            foreach (var service in services)
+            {
+                var serviceInfo = service.Split('=', StringSplitOptions.RemoveEmptyEntries);
+
+                Add(new ServiceInfo(serviceInfo[0].Trim(), serviceInfo[1].Trim()));
+            }
         }
 
         public void Add(ServiceInfo serviceInfo)

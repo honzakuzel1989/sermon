@@ -14,5 +14,10 @@ namespace sermon.Core.Entities
 
         public string Name { get; }
         public string Url { get; }
+
+        public override string ToString()
+        {
+            return $"{Name}: {Url}";
+        }
     }
 }

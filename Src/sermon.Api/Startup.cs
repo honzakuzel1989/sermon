@@ -27,7 +27,7 @@ namespace sermon
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IHttpClientProvider, HttpClientProvider>();
-            services.AddTransient<IServicesInfoProvider, DirectServicesInfoProvider>();
+            services.AddSingleton<IServicesInfoProvider, DirectServicesInfoProvider>();
             services.AddTransient<IServicesStatusProvider, ServicesStatusProvider>();
 
             services.AddHostedService<SermonHosedService>();
