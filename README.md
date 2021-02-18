@@ -17,6 +17,6 @@ SERMON_CUSTOM_SERVICES - services' names and urls, format name1=whole_url1;name2
   weather=http://localhost:5010/weather;  
   location=http://localhost:5015/location;  
   system=http://localhost:5020/system;  
-  weatherhub=http://localhost:5025/weatherhub"  
+  weatherhub=http://localhost:5025/weatherhub
 SERMON_CHECK_INTERVAL_S - check interval in seconds, default 5s
 ```
