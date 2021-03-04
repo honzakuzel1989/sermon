@@ -15,7 +15,8 @@ namespace sermon.Core.Services
             weather=http://localhost:5010/weather;
             location=http://localhost:5015/location;
             system=http://localhost:5020/system;
-            weatherhub=http://localhost:5025/weatherhub";
+            weatherhub=http://localhost:5025/weatherhub;
+            covid=http://localhost:5030/covid";
 
         private readonly ConcurrentBag<ServiceInfo> _serviceInfos;
         private readonly ILogger<DirectServicesInfoProvider> _logger;
